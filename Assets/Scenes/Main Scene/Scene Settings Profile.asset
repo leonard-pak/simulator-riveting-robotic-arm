@@ -32,7 +32,7 @@ MonoBehaviour:
     m_Value: 4
   maximumIntensity:
     m_OverrideState: 1
-    m_Value: 10
+    m_Value: 1000
   denoising:
     m_OverrideState: 1
     m_Value: 2
@@ -86,7 +86,7 @@ MonoBehaviour:
     m_OverrideState: 0
     m_Value: 0
   scaleBiasWithMinProbeDistance:
-    m_OverrideState: 1
+    m_OverrideState: 0
     m_Value: 0
   samplingNoise:
     m_OverrideState: 0
