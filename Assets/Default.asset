@@ -15,7 +15,7 @@ MonoBehaviour:
   version: 0
   freezePlacement: 0
   simplificationLevels: 3
-  minDistanceBetweenProbes: 1
+  minDistanceBetweenProbes: 0.5
   renderersLayerMask:
     serializedVersion: 2
     m_Bits: 4294967295
