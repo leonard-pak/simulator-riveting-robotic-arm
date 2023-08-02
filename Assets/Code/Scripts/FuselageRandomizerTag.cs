@@ -84,12 +84,12 @@ namespace SimulatorRivetingRoboticArm.Perception
                 {
                     x += XPlaneIterationInc(j);
                     position.Set((float)x, (float)y, (float)z);
-                    Instantiate(
+                    var block = Instantiate(
                         (binaryMtx[i][j]) ? blockType1 : blockType2,
-                        position,
-                        rotation,
-                        transform
+                        transform, false
                     );
+                    block.transform.localPosition = position;
+                    block.transform.localRotation = rotation;
                 }
             }
             return;

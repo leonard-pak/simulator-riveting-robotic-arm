@@ -157,7 +157,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31394aa05878563408489d5c1688f3a0, type: 3}
   m_Name: PathTracing
   m_EditorClassIdentifier: 
-  active: 0
+  active: 1
   enable:
     m_OverrideState: 1
     m_Value: 1
@@ -168,7 +168,7 @@ MonoBehaviour:
       m_Bits: 4294967295
   maximumSamples:
     m_OverrideState: 1
-    m_Value: 128
+    m_Value: 256
   minimumDepth:
     m_OverrideState: 0
     m_Value: 1
@@ -177,7 +177,7 @@ MonoBehaviour:
     m_Value: 4
   maximumIntensity:
     m_OverrideState: 1
-    m_Value: 1000
+    m_Value: 10
   denoising:
     m_OverrideState: 1
     m_Value: 2
@@ -186,12 +186,12 @@ MonoBehaviour:
     m_Value: 1
   temporal:
     m_OverrideState: 0
-    m_Value: 0
+    m_Value: 1
   asyncDenoising:
     m_OverrideState: 0
     m_Value: 1
   skyImportanceSampling:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 0
   tilingParameters:
     m_OverrideState: 0
@@ -462,6 +462,7 @@ MonoBehaviour:
   - {fileID: -8791658484182794686}
   - {fileID: -6211010809906842016}
   - {fileID: -2837359695603279016}
+  - {fileID: 6567899425708528846}
 --- !u!114 &5775570244769011323
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -543,3 +544,43 @@ MonoBehaviour:
   m_DenoiserRadius:
     m_OverrideState: 1
     m_Value: 0.6
+--- !u!114 &6567899425708528846
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d877a03bef431a847adca8ab343db3e1, type: 3}
+  m_Name: RayTracingSettings
+  m_EditorClassIdentifier: 
+  active: 1
+  rayBias:
+    m_OverrideState: 0
+    m_Value: 0.001
+  distantRayBias:
+    m_OverrideState: 0
+    m_Value: 0.001
+  extendShadowCulling:
+    m_OverrideState: 0
+    m_Value: 1
+  extendCameraCulling:
+    m_OverrideState: 0
+    m_Value: 0
+  directionalShadowRayLength:
+    m_OverrideState: 0
+    m_Value: 1000
+  directionalShadowFallbackIntensity:
+    m_OverrideState: 0
+    m_Value: 1
+  buildMode:
+    m_OverrideState: 0
+    m_Value: 0
+  cullingMode:
+    m_OverrideState: 0
+    m_Value: 0
+  cullingDistance:
+    m_OverrideState: 0
+    m_Value: 1000

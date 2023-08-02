@@ -105,7 +105,7 @@ MonoBehaviour:
         m_Extent: {x: 40.5, y: 40.5, z: 40.5}
     serializedHasVolumes:
     - sceneGUID: 9e2e684aa7e5e9b438cfeba49f27b799
-      hasProbeVolumes: 1
+      hasProbeVolumes: 0
     serializedProfiles:
     - sceneGUID: 9e2e684aa7e5e9b438cfeba49f27b799
       profile: {fileID: 11400000, guid: d9731800c76b7e547b931c61e03ef08b, type: 2}
