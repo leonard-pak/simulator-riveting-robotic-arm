@@ -157,7 +157,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31394aa05878563408489d5c1688f3a0, type: 3}
   m_Name: PathTracing
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   enable:
     m_OverrideState: 1
     m_Value: 1
@@ -558,22 +558,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   active: 1
   rayBias:
-    m_OverrideState: 0
-    m_Value: 0.001
+    m_OverrideState: 1
+    m_Value: 0.01
   distantRayBias:
-    m_OverrideState: 0
-    m_Value: 0.001
+    m_OverrideState: 1
+    m_Value: 0.015
   extendShadowCulling:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 1
   extendCameraCulling:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 0
   directionalShadowRayLength:
-    m_OverrideState: 0
-    m_Value: 1000
+    m_OverrideState: 1
+    m_Value: 10000
   directionalShadowFallbackIntensity:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 1
   buildMode:
     m_OverrideState: 0
