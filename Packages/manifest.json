@@ -5,6 +5,7 @@
     "com.unity.perception": "1.0.0-preview.1",
     "com.unity.render-pipelines.high-definition": "14.0.8",
     "com.unity.rendering.denoising": "1.0.0",
+    "com.unity.robotics.urdf-importer": "https://github.com/Unity-Technologies/URDF-Importer.git?path=/com.unity.robotics.urdf-importer#v0.5.2",
     "com.unity.textmeshpro": "3.0.6",
     "com.unity.timeline": "1.7.5",
     "com.unity.ugui": "1.0.0",
