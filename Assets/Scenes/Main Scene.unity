@@ -705,7 +705,7 @@ MonoBehaviour:
     - rid: 1232146289014865959
       type: {class: AccumulationSettings, ns: UnityEngine.Perception.Settings, asm: Unity.Perception.Runtime}
       data:
-        accumulationSamples: 16383
+        accumulationSamples: 128
         shutterInterval: 0
         shutterFullyOpen: 0
         shutterBeginsClosing: 1
