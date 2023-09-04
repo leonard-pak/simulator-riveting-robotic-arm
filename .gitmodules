@@ -2,3 +2,4 @@
 	path = Assets/URDF/Dobot
 	url = ../../ArtemVinokurov/dobot_moveit2.git
 	branch = only-model
+	ignore = dirty
