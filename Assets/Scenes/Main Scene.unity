@@ -1082,9 +1082,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9ecbefe3c9a20c4595846bef77cdc35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  blockType1: {fileID: 3285628796427650491, guid: 3bb092c1bd8a5f14a80edfcb4f714edd,
+  blockTrue: {fileID: 6727498643576577903, guid: 79bbbd1dec48d534cbd1a3f2fb3e62f4,
     type: 3}
-  blockType2: {fileID: 6727498643576577903, guid: 79bbbd1dec48d534cbd1a3f2fb3e62f4,
+  blockFalse: {fileID: 3285628796427650491, guid: 3bb092c1bd8a5f14a80edfcb4f714edd,
     type: 3}
   R: 1
   sideSize: 0.05

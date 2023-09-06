@@ -1,18 +1,17 @@
 using System;
-using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
+using Matrix2D = System.Collections.Generic.List<System.Collections.Generic.List<bool>>;
 
 namespace SimulatorRivetingRoboticArm
 {
-    using Matrix2D = List<List<bool>>;
     public class FuselageBuilder : MonoBehaviour
     {
         /**
         * Base block must be square
         */
-        [SerializeField] private GameObject blockType1 = null;
-        [SerializeField] private GameObject blockType2 = null;
+        [SerializeField] private GameObject blockTrue = null;
+        [SerializeField] private GameObject blockFalse = null;
         [SerializeField] private double R = 0f;
         [SerializeField] private double sideSize = 0f;
 
@@ -31,7 +30,7 @@ namespace SimulatorRivetingRoboticArm
 
         private void Awake()
         {
-            plane = new CylindricalPlaneCalculator(R, sideSize, blockType1.transform.eulerAngles);
+            plane = new CylindricalPlaneCalculator(R, sideSize, blockTrue.transform.eulerAngles);
         }
         public void Build(Matrix2D binaryMtx)
         {
@@ -51,7 +50,7 @@ namespace SimulatorRivetingRoboticArm
                     x += plane.XPlaneIterationInc(j);
                     position.Set((float)x, (float)y, (float)z);
                     var block = Instantiate(
-                        (binaryMtx[i][j]) ? blockType1 : blockType2,
+                        (binaryMtx[i][j]) ? blockTrue : blockFalse,
                         transform, false
                     );
                     block.transform.localPosition = position;
@@ -61,7 +60,7 @@ namespace SimulatorRivetingRoboticArm
             return;
         }
 
-        public void Destroy()
+        public void Crush()
         {
             foreach (Transform child in transform)
             {

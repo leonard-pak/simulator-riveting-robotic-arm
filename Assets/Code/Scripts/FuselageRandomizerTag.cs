@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Perception.Randomization.Parameters;
 using UnityEngine.Perception.Randomization.Randomizers;
+using Matrix2D = System.Collections.Generic.List<System.Collections.Generic.List<bool>>;
 
 namespace SimulatorRivetingRoboticArm.Perception
 {
-    using Matrix2D = List<List<bool>>;
     [RequireComponent(typeof(FuselageBuilder))]
     public class FuselageRandomizerTag : RandomizerTag
     {
@@ -16,7 +16,7 @@ namespace SimulatorRivetingRoboticArm.Perception
             builder = gameObject.GetComponent<FuselageBuilder>();
         }
         public void BuildFuselage(Matrix2D m) => builder.Build(m);
-        public void DestroyFuselage() => builder.Destroy();
+        public void DestroyFuselage() => builder.Crush();
         public int MtxDimX => builder.MtxDimX;
         public int MtxDimY => builder.MtxDimY;
 

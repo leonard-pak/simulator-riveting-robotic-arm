@@ -234,7 +234,7 @@ GameObject:
   - component: {fileID: 147809146}
   - component: {fileID: 147809145}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: Platform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2282,14 +2282,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9ecbefe3c9a20c4595846bef77cdc35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  blockType1: {fileID: 3285628796427650491, guid: 3bb092c1bd8a5f14a80edfcb4f714edd,
+  blockTrue: {fileID: 6727498643576577903, guid: 79bbbd1dec48d534cbd1a3f2fb3e62f4,
     type: 3}
-  blockType2: {fileID: 6727498643576577903, guid: 79bbbd1dec48d534cbd1a3f2fb3e62f4,
+  blockFalse: {fileID: 3285628796427650491, guid: 3bb092c1bd8a5f14a80edfcb4f714edd,
     type: 3}
-  R: 0
-  sideSize: 0
-  xMax: 0
-  angleMax: 0
+  R: 1
+  sideSize: 0.05
+  xMax: 1
+  angleMax: 60
 --- !u!1 &875514110
 GameObject:
   m_ObjectHideFlags: 8
@@ -3039,7 +3039,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1279056383
 Transform:
   m_ObjectHideFlags: 0
@@ -4531,6 +4531,9 @@ GameObject:
   - component: {fileID: 1958353987}
   - component: {fileID: 1958353989}
   - component: {fileID: 1958353988}
+  - component: {fileID: 1958353991}
+  - component: {fileID: 1958353990}
+  - component: {fileID: 1958353992}
   m_Layer: 0
   m_Name: dobot_cr16
   m_TagString: robot
@@ -4567,9 +4570,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c2c9d7fa63a94740a23c471ef7c456a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  forceLimit: 1000
-  stiffness: 10000
-  damping: 100
+  velocityLimit: 50
+  forceLimit: 10000
+  stiffness: 100000
+  damping: 10000
 --- !u!114 &1958353989
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4586,6 +4590,69 @@ MonoBehaviour:
   chosenAxis: 0
   currentOrientation: 0
   collisionExceptions: []
+--- !u!114 &1958353990
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1958353986}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f565eeac977f8484f8d07c43ce4bff06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  agentParameters:
+    maxStep: 0
+  hasUpgradedFromAgentParameters: 1
+  MaxStep: 0
+  fuselageBuilder: {fileID: 849534556}
+  controller: {fileID: 1958353988}
+--- !u!114 &1958353991
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1958353986}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d1c4e0b1822b495aa52bc52839ecb30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_BrainParameters:
+    VectorObservationSize: 0
+    NumStackedVectorObservations: 1
+    m_ActionSpec:
+      m_NumContinuousActions: 6
+      BranchSizes: 
+    VectorActionSize: 06000000
+    VectorActionDescriptions: []
+    VectorActionSpaceType: 1
+    hasUpgradedBrainParametersWithActionSpec: 1
+  m_Model: {fileID: 0}
+  m_InferenceDevice: 0
+  m_BehaviorType: 1
+  m_BehaviorName: DobotCR16
+  TeamId: 0
+  m_UseChildSensors: 1
+  m_UseChildActuators: 1
+  m_DeterministicInference: 0
+  m_ObservableAttributeHandling: 0
+--- !u!114 &1958353992
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1958353986}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a5c9d521e5ef4759a8246a07d52221e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DecisionPeriod: 5
+  TakeActionsBetweenDecisions: 1
 --- !u!1 &1969200637
 GameObject:
   m_ObjectHideFlags: 8
