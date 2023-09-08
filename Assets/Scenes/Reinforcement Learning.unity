@@ -4608,6 +4608,8 @@ MonoBehaviour:
   MaxStep: 0
   fuselageBuilder: {fileID: 849534556}
   controller: {fileID: 1958353988}
+  inputActions: {fileID: -944628639613478452, guid: a1b138b7524a4f747b26d0cd40ef6daa,
+    type: 3}
 --- !u!114 &1958353991
 MonoBehaviour:
   m_ObjectHideFlags: 0

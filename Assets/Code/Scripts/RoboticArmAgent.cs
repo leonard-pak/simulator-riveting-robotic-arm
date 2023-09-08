@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.MLAgents;
 using Unity.MLAgents.Actuators;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using Matrix2D = System.Collections.Generic.List<System.Collections.Generic.List<bool>>;
 
 namespace SimulatorRivetingRoboticArm.ML
@@ -14,6 +15,8 @@ namespace SimulatorRivetingRoboticArm.ML
         private int[] targerIdx;
 
         [SerializeField] private RoboticArmController controller;
+
+        [SerializeField] private InputActionAsset inputActions;
         protected override void Awake()
         {
             base.Awake();
@@ -29,6 +32,16 @@ namespace SimulatorRivetingRoboticArm.ML
                 }
             }
             targerIdx = new int[2];
+        }
+        protected override void OnEnable()
+        {
+            base.OnEnable();
+            inputActions.Enable();
+        }
+        protected override void OnDisable()
+        {
+            base.OnDisable();
+            inputActions.Disable();
         }
         public override void OnEpisodeBegin()
         {
@@ -50,8 +63,10 @@ namespace SimulatorRivetingRoboticArm.ML
         public override void Heuristic(in ActionBuffers actionsOut)
         {
             var actions = actionsOut.ContinuousActions;
-            actions[0] = Input.GetAxis("Horizontal");
-            actions[1] = Input.GetAxis("Vertical");
+            for (int i = 0; i < actionsOut.ContinuousActions.Length; ++i)
+            {
+                actions[i] = inputActions.FindActionMap("Robotic Arm").FindAction("Link " + (i + 1).ToString()).ReadValue<float>();
+            }
         }
 
         public void CollisionNotify(Collision collision)
