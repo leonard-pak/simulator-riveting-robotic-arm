@@ -22,6 +22,7 @@ namespace SimulatorRivetingRoboticArm
 
         public int MtxDimX => (int)(xMax / sideSize);
         public int MtxDimY => (int)((math.PI * R * angleMax / 180) / sideSize);
+        public bool IsBuilt => transform.childCount > 0;
         /**
          * Functions for iterating over plane projections
          * iter - current iteration, start at 0

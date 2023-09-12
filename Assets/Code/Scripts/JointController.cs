@@ -74,9 +74,7 @@ namespace SimulatorRivetingRoboticArm.Robotics
         {
             speed = 0;
 
-            var drive = joint.xDrive;
-            drive.target = 0;
-            joint.xDrive = drive;
+            joint.SetDriveTarget(ArticulationDriveAxis.X, 0);
         }
     }
 
