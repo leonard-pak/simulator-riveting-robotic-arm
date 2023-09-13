@@ -124,6 +124,7 @@ namespace SimulatorRivetingRoboticArm.ML
         {
             Destroy(roboticArm);
             fuselageBuilder.Crush();
+            fuselageMtx[targerIdx[0]][targerIdx[1]] = false;
             roboticArm = null;
             EndEpisode();
         }
