@@ -1,44 +1,39 @@
 using SimulatorRivetingRoboticArm.Robotics;
-using System.Collections.Generic;
 using Unity.MLAgents;
 using Unity.MLAgents.Actuators;
-using Unity.MLAgents.Extensions.Sensors;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using Matrix2D = System.Collections.Generic.List<System.Collections.Generic.List<bool>>;
 
 namespace SimulatorRivetingRoboticArm.ML
 {
-    public class RoboticArmAgent : Agent
+    public class RoboticArmAgent : Agent, ICollisionObserver
     {
+        // For fuselage
         [SerializeField] private FuselageBuilder fuselageBuilder;
-        private Matrix2D fuselageMtx;
         private int[] targerIdx;
-
-        [SerializeField] private GameObject roboticArmPrefab;
-        private GameObject roboticArm;
-        private RoboticArmController controller;
-
+        // For robotic arm
+        [SerializeField] private RoboticArmController controller;
         [SerializeField] private InputActionAsset inputActions;
-        [SerializeField] private PhysicsSensorSettings jointsSensorSetings;
-
-        private bool ignoreCollision = false;
-
-        protected override void Awake()
+        // For rewards
+        private Transform targetHole = null;
+        [SerializeField] private Transform eef = null;
+        [SerializeField] float positionErr = 0.1f; // meters
+        [SerializeField] float angleErr = 0.1f; // degrees
+        // For visualization
+        [SerializeField] Material successEpisodeMaterial;
+        [SerializeField] Material failureEpisodeMaterial;
+        [SerializeField] MeshRenderer indicator;
+        // For throttle
+        private float lastNotify = 0f;
+        [SerializeField, Range(0f, 1f)] private float collisionNotifyPeriod = 0.1f;
+        public override void Initialize()
         {
-            base.Awake();
-            fuselageMtx = new();
-            int xDim = fuselageBuilder.MtxDimX;
-            int yDim = fuselageBuilder.MtxDimY;
-            for (int y = 0; y < yDim; ++y)
+            targerIdx = new int[] { 0, 0 };
+            var subjects = GetComponentsInChildren<CollisionSubject>();
+            foreach (var subject in subjects)
             {
-                fuselageMtx.Add(new List<bool>());
-                for (int x = 0; x < xDim; ++x)
-                {
-                    fuselageMtx[y].Add(false);
-                }
+                subject.Initialize(this);
             }
-            targerIdx = new int[2];
         }
         protected override void OnEnable()
         {
@@ -52,52 +47,31 @@ namespace SimulatorRivetingRoboticArm.ML
         }
         public override void OnEpisodeBegin()
         {
-            InitializeRoboticArm();
-            InitializeFuselage();
-        }
-        private void InitializeRoboticArm()
-        {
-            if (!roboticArm)
-            {
-                Destroy(roboticArm);
-            }
+            fuselageBuilder.Crush();
+            controller.ResetJoints();
 
-            roboticArm = Instantiate(roboticArmPrefab, transform, false);
-            controller = roboticArm.GetComponent<RoboticArmController>();
+            targerIdx[0] = Random.Range(0, fuselageBuilder.MtxDimX);
+            targerIdx[1] = Random.Range(0, fuselageBuilder.MtxDimY);
 
-            var bodies = roboticArm.GetComponentsInChildren<ArticulationBody>();
-            foreach (var joint in bodies)
-            {
-                if (joint.isRoot)
-                {
-                    var sensor = joint.gameObject.AddComponent<ArticulationBodySensorComponent>();
-                    sensor.RootBody = joint;
-                    sensor.Settings = jointsSensorSetings;
-                }
-                var obs = joint.gameObject.AddComponent<CollisionWithRoboticArmAgent>();
-                obs.Initialize(this);
-            }
-        }
-        private void LateUpdate()
-        {
-            ignoreCollision = false;
-        }
-        private void InitializeFuselage()
-        {
-            if (fuselageBuilder.IsBuilt)
-            {
-                fuselageBuilder.Crush();
-            }
-            targerIdx[0] = Random.Range(0, fuselageMtx.Count);
-            targerIdx[1] = Random.Range(0, fuselageMtx[0].Count);
-            fuselageMtx[targerIdx[0]][targerIdx[1]] = true;
-            fuselageBuilder.Build(fuselageMtx);
+            targetHole = fuselageBuilder.Build(targerIdx[0], targerIdx[1]).transform;
         }
         public override void OnActionReceived(ActionBuffers actions)
         {
             for (int i = 0; i < actions.ContinuousActions.Length; ++i)
             {
                 controller.RotateJoint(i, actions.ContinuousActions[i], true);
+            }
+
+            var distance = Vector3.Distance(targetHole.position, eef.position);
+            var angle = Vector3.Angle(targetHole.up, eef.up);
+
+            if (distance < positionErr && angle < angleErr)
+            {
+                SuccessEndEpisode();
+            }
+            else if (distance < 1f)
+            {
+                AddReward(1 - distance);
             }
         }
         public override void Heuristic(in ActionBuffers actionsOut)
@@ -108,27 +82,26 @@ namespace SimulatorRivetingRoboticArm.ML
                 actions[i] = inputActions.FindActionMap("Robotic Arm").FindAction("Link " + (i + 1).ToString()).ReadValue<float>();
             }
         }
-
-        public void CollisionNotify(Collision collision)
+        public void Notify(Collision collision)
         {
-            if (ignoreCollision) return;
-            ignoreCollision = true;
+            if (Time.time - lastNotify < collisionNotifyPeriod) return;
+            lastNotify = Time.time;
+
             if (collision.gameObject.CompareTag("fuselage"))
             {
                 SetReward(-1f);
-                ResetEpisode();
+                FailEndEpisode();
             }
         }
-
-        private void ResetEpisode()
+        private void SuccessEndEpisode()
         {
-            Destroy(roboticArm);
-            fuselageBuilder.Crush();
-            fuselageMtx[targerIdx[0]][targerIdx[1]] = false;
-            roboticArm = null;
+            indicator.material = successEpisodeMaterial;
             EndEpisode();
         }
-
+        private void FailEndEpisode()
+        {
+            indicator.material = failureEpisodeMaterial;
+            EndEpisode();
+        }
     }
-
 }

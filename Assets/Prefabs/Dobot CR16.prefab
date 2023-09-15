@@ -46,6 +46,7 @@ GameObject:
   - component: {fileID: 8951619438895218982}
   - component: {fileID: 2014319046767165156}
   - component: {fileID: 476607908366609498}
+  - component: {fileID: 5698888688155382079}
   m_Layer: 0
   m_Name: Link1
   m_TagString: Untagged
@@ -184,6 +185,18 @@ MonoBehaviour:
   jointName: joint1
   EffortLimit: 1000
   VelocityLimit: 1000
+--- !u!114 &5698888688155382079
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 69484026004798471}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afd87ca55c0f50a4984855799ff141c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &147842876147534203
 GameObject:
   m_ObjectHideFlags: 0
@@ -547,6 +560,7 @@ GameObject:
   - component: {fileID: 3065539358701374866}
   - component: {fileID: 2990840538057649583}
   - component: {fileID: 8640828451238908800}
+  - component: {fileID: 8784153062013638838}
   m_Layer: 0
   m_Name: Link6
   m_TagString: Untagged
@@ -685,6 +699,18 @@ MonoBehaviour:
   jointName: joint6
   EffortLimit: 1000
   VelocityLimit: 1000
+--- !u!114 &8784153062013638838
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1002755730821498686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afd87ca55c0f50a4984855799ff141c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1044337592184253229
 GameObject:
   m_ObjectHideFlags: 0
@@ -938,6 +964,7 @@ GameObject:
   - component: {fileID: 1088815979907307641}
   - component: {fileID: 3938419623570692117}
   - component: {fileID: 191529476453401655}
+  - component: {fileID: 684950687075267019}
   m_Layer: 0
   m_Name: Link5
   m_TagString: Untagged
@@ -1077,6 +1104,18 @@ MonoBehaviour:
   jointName: joint5
   EffortLimit: 1000
   VelocityLimit: 1000
+--- !u!114 &684950687075267019
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1848926675802068799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afd87ca55c0f50a4984855799ff141c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1966999697809987910
 GameObject:
   m_ObjectHideFlags: 0
@@ -2170,6 +2209,7 @@ GameObject:
   - component: {fileID: 6370606505877344362}
   - component: {fileID: 758334489791814557}
   - component: {fileID: 4829590284893942028}
+  - component: {fileID: 3624470585532389126}
   m_Layer: 0
   m_Name: Dobot CR16
   m_TagString: robot
@@ -2186,7 +2226,7 @@ Transform:
   m_GameObject: {fileID: 4642657690657941542}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.25, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2226,6 +2266,29 @@ MonoBehaviour:
   forceLimit: 10000
   stiffness: 100000
   damping: 10000
+--- !u!114 &3624470585532389126
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4642657690657941542}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e57a788acd5e049c6aa9642b450ca318, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RootBody: {fileID: 5987723071424562938}
+  Settings:
+    UseModelSpaceTranslations: 0
+    UseModelSpaceRotations: 0
+    UseLocalSpaceTranslations: 0
+    UseLocalSpaceRotations: 0
+    UseModelSpaceLinearVelocity: 0
+    UseLocalSpaceLinearVelocity: 0
+    UseJointPositionsAndAngles: 1
+    UseJointForces: 0
+  sensorName: joints
 --- !u!1 &5248763267944480507
 GameObject:
   m_ObjectHideFlags: 0
@@ -2239,6 +2302,7 @@ GameObject:
   - component: {fileID: 4354698634703413846}
   - component: {fileID: 8942011209508581343}
   - component: {fileID: 3714972490992508281}
+  - component: {fileID: 319521365140853363}
   m_Layer: 0
   m_Name: Link4
   m_TagString: Untagged
@@ -2377,6 +2441,18 @@ MonoBehaviour:
   jointName: joint4
   EffortLimit: 1000
   VelocityLimit: 1000
+--- !u!114 &319521365140853363
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5248763267944480507}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afd87ca55c0f50a4984855799ff141c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5651902016946138618
 GameObject:
   m_ObjectHideFlags: 0
@@ -2512,6 +2588,7 @@ GameObject:
   - component: {fileID: 1954683304198460674}
   - component: {fileID: 5987723071424562938}
   - component: {fileID: 2694551031003724937}
+  - component: {fileID: 7160828955211326420}
   m_Layer: 0
   m_Name: Base
   m_TagString: Untagged
@@ -2634,6 +2711,18 @@ MonoBehaviour:
   inertiaTensor: {x: 0.0041728527, y: 0.004312802, z: 0.0067704446}
   inertiaTensorRotation: {x: -0.49644864, y: 0.4986863, z: 0.503438, w: 0.5013989}
   inertialAxisRotation: {x: 0, y: 0, z: 0, w: 1}
+--- !u!114 &7160828955211326420
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5660460475760398999}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afd87ca55c0f50a4984855799ff141c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5744640366616256132
 GameObject:
   m_ObjectHideFlags: 0
@@ -2694,6 +2783,7 @@ GameObject:
   - component: {fileID: 3361494421595023440}
   - component: {fileID: 5222697677818538042}
   - component: {fileID: 8282396888918161520}
+  - component: {fileID: 1649893072481731152}
   m_Layer: 0
   m_Name: Link2
   m_TagString: Untagged
@@ -2832,6 +2922,18 @@ MonoBehaviour:
   jointName: joint2
   EffortLimit: 1000
   VelocityLimit: 1000
+--- !u!114 &1649893072481731152
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6007923772978095606}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afd87ca55c0f50a4984855799ff141c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6184150361305784281
 GameObject:
   m_ObjectHideFlags: 0
@@ -3499,6 +3601,7 @@ GameObject:
   - component: {fileID: 307515149653482637}
   - component: {fileID: 3546665469090409147}
   - component: {fileID: 6789415748619990808}
+  - component: {fileID: 5106226570713492972}
   m_Layer: 0
   m_Name: Link3
   m_TagString: Untagged
@@ -3639,6 +3742,18 @@ MonoBehaviour:
   jointName: joint3
   EffortLimit: 1000
   VelocityLimit: 1000
+--- !u!114 &5106226570713492972
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8665700833514249406}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afd87ca55c0f50a4984855799ff141c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8757154769583233560
 GameObject:
   m_ObjectHideFlags: 0

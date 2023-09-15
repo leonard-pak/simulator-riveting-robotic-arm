@@ -22,7 +22,6 @@ namespace SimulatorRivetingRoboticArm
 
         public int MtxDimX => (int)(xMax / sideSize);
         public int MtxDimY => (int)((math.PI * R * angleMax / 180) / sideSize);
-        public bool IsBuilt => transform.childCount > 0;
         /**
          * Functions for iterating over plane projections
          * iter - current iteration, start at 0
@@ -54,11 +53,42 @@ namespace SimulatorRivetingRoboticArm
                         (binaryMtx[i][j]) ? blockTrue : blockFalse,
                         transform, false
                     );
-                    block.transform.localPosition = position;
-                    block.transform.localRotation = rotation;
+                    block.transform.SetLocalPositionAndRotation(position, rotation);
                 }
             }
             return;
+        }
+
+        public GameObject Build(int holeX, int holeY)
+        {
+            var position = new Vector3();
+            var rotation = new Quaternion();
+            var y = 0d;
+            var z = 0d;
+            GameObject hole = null;
+            for (int i = 0; i < MtxDimY; ++i)
+            {
+                y += plane.YPlaneIterationInc(i);
+                z += plane.ZPlaneIterationInc(i);
+                rotation.eulerAngles += plane.AngleIterationInc(i);
+                var x = 0d;
+
+                for (int j = 0; j < MtxDimX; ++j)
+                {
+                    x += plane.XPlaneIterationInc(j);
+                    position.Set((float)x, (float)y, (float)z);
+                    var block = Instantiate(
+                        (j == holeX && i == holeY) ? blockTrue : blockFalse,
+                        transform, false
+                    );
+                    block.transform.SetLocalPositionAndRotation(position, rotation);
+                    if (j == holeX && i == holeY)
+                    {
+                        hole = block;
+                    }
+                }
+            }
+            return hole;
         }
 
         public void Crush()
