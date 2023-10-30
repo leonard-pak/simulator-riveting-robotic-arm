@@ -25,13 +25,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3268399212004478117}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.06540306, y: 0, z: 0, w: 0.99785894}
+  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1212602923567692002}
-  m_LocalEulerAnglesHint: {x: -7.5, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!114 &2216787503047049124
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -50,8 +50,12 @@ MonoBehaviour:
     type: 3}
   R: 1
   sideSize: 0.05
-  xMax: 0.5
-  angleMax: 30
+  xRangeForeground: 0.5
+  angleRangeForeground: 25
+  xBeginForeground: 0.75
+  angleBeginForeground: 80
+  xRangeBackground: 2
+  angleRangeBackground: 180
 --- !u!1 &3599938715810037268
 GameObject:
   m_ObjectHideFlags: 0
@@ -218,7 +222,7 @@ Transform:
   m_GameObject: {fileID: 8246066540243953142}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.5, y: 0.125, z: -1.5}
+  m_LocalPosition: {x: 0, y: 0, z: -1.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -277,18 +281,9 @@ MonoBehaviour:
   controller: {fileID: 2545136466363397759}
   inputActions: {fileID: -944628639613478452, guid: a1b138b7524a4f747b26d0cd40ef6daa,
     type: 3}
-  jointsSensorSetings:
-    UseModelSpaceTranslations: 0
-    UseModelSpaceRotations: 0
-    UseLocalSpaceTranslations: 0
-    UseLocalSpaceRotations: 0
-    UseModelSpaceLinearVelocity: 0
-    UseLocalSpaceLinearVelocity: 0
-    UseJointPositionsAndAngles: 1
-    UseJointForces: 0
   eef: {fileID: 1241942585584241594}
   positionErr: 0.1
-  angleErr: 10
+  angleErr: 360
   successEpisodeMaterial: {fileID: 2100000, guid: d374c1f3dd8cd1b4aa484a6beaf5301e,
     type: 2}
   failureEpisodeMaterial: {fileID: 2100000, guid: c6c63d0f0258bd14280de8d109b429e3,

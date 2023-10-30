@@ -17,12 +17,12 @@ namespace SimulatorRivetingRoboticArm.ML
         // For rewards
         private Transform targetHole = null;
         [SerializeField] private Transform eef = null;
-        [SerializeField] float positionErr = 0.1f; // meters
-        [SerializeField] float angleErr = 0.1f; // degrees
+        [SerializeField] private float positionErr = 0.1f; // meters
+        [SerializeField] private float angleErr = 0.1f; // degrees
         // For visualization
-        [SerializeField] Material successEpisodeMaterial;
-        [SerializeField] Material failureEpisodeMaterial;
-        [SerializeField] MeshRenderer indicator;
+        [SerializeField] private Material successEpisodeMaterial;
+        [SerializeField] private Material failureEpisodeMaterial;
+        [SerializeField] private MeshRenderer indicator;
         // For throttle
         private float lastNotify = 0f;
         [SerializeField, Range(0f, 1f)] private float collisionNotifyPeriod = 0.1f;
@@ -48,12 +48,12 @@ namespace SimulatorRivetingRoboticArm.ML
         public override void OnEpisodeBegin()
         {
             fuselageBuilder.Crush();
-            controller.ResetJoints();
+            //controller.ResetJoints();
 
-            targerIdx[0] = Random.Range(0, fuselageBuilder.MtxDimX);
-            targerIdx[1] = Random.Range(0, fuselageBuilder.MtxDimY);
+            targerIdx[0] = Random.Range(0, fuselageBuilder.CountForegroundBlocksX);
+            targerIdx[1] = Random.Range(0, fuselageBuilder.CountForegroundBlocksY);
 
-            targetHole = fuselageBuilder.Build(targerIdx[0], targerIdx[1]).transform;
+            targetHole = fuselageBuilder.BuildWithBackground(targerIdx[0], targerIdx[1]).transform;
         }
         public override void OnActionReceived(ActionBuffers actions)
         {

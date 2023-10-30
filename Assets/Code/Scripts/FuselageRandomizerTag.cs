@@ -17,8 +17,8 @@ namespace SimulatorRivetingRoboticArm.Perception
         }
         public void BuildFuselage(Matrix2D m) => builder.Build(m);
         public void DestroyFuselage() => builder.Crush();
-        public int MtxDimX => builder.MtxDimX;
-        public int MtxDimY => builder.MtxDimY;
+        public int MtxDimX => builder.CountForegroundBlocksX;
+        public int MtxDimY => builder.CountForegroundBlocksY;
 
     }
 
