@@ -734,6 +734,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2048725052025243221, guid: 9d7277ae077d377418cc8f6cfa6416c7,
         type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2048725052025243221, guid: 9d7277ae077d377418cc8f6cfa6416c7,
+        type: 3}
       propertyPath: m_ParentAnchorPosition.y
       value: 0.1765
       objectReference: {fileID: 0}

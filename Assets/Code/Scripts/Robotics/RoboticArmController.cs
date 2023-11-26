@@ -36,7 +36,7 @@ namespace SimulatorRivetingRoboticArm.Robotics
             var scale = (normalized) ?
                         velocityLimit :
                         1;
-            jointControllers[jointIndex].SetSpeed(scale * target);
+            jointControllers[jointIndex].Speed = scale * target;
         }
         public void ResetJoints()
         {

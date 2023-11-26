@@ -7,10 +7,21 @@ namespace SimulatorRivetingRoboticArm.Robotics
         private ArticulationBody joint;
         private float speed = 0f;
 
-        public float SetSpeed(float newSpeed) => speed = newSpeed;
+        private Vector3 defaultPosition;
+        private Quaternion defaultRotation;
+        private ArticulationDrive defaultDrive;
+
+        public float Speed
+        {
+            set { this.speed = value; }
+        }
+
         private void Awake()
         {
             joint = GetComponent<ArticulationBody>();
+            defaultPosition = transform.position;
+            defaultRotation = transform.rotation;
+            defaultDrive = joint.xDrive;
         }
         private void FixedUpdate()
         {
@@ -72,7 +83,13 @@ namespace SimulatorRivetingRoboticArm.Robotics
         {
             speed = 0;
 
-            joint.SetDriveTarget(ArticulationDriveAxis.X, 0);
+            joint.enabled = false;
+            joint.transform.position = defaultPosition;
+            joint.transform.rotation = defaultRotation;
+            joint.velocity = Vector3.zero;
+            joint.angularVelocity = Vector3.zero;
+            joint.xDrive = defaultDrive;
+            joint.enabled = true;
         }
     }
 

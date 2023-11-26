@@ -64,6 +64,7 @@ namespace SimulatorRivetingRoboticArm.ML
         public override void OnEpisodeBegin()
         {
             fuselageBuilder.Crush();
+            controller.ResetJoints();
 
             targerIdx[0] = Random.Range(0, fuselageBuilder.CountHoleBlocksX);
             targerIdx[1] = Random.Range(0, fuselageBuilder.CountHoleBlocksY);
