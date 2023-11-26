@@ -1,15 +1,15 @@
 using UnityEngine;
 
-namespace SimulatorRivetingRoboticArm
+namespace SimulatorRivetingRoboticArm.Robotics
 {
     public class CollisionSubject : MonoBehaviour
     {
-        private ICollisionObserver observer;
-        public void Initialize(ICollisionObserver newObserver)
+        private Interfaces.ICollisionObserver observer;
+        public void Initialize(Interfaces.ICollisionObserver newObserver)
         {
             observer = newObserver;
         }
-        private void OnCollisionEnter(Collision collision)
+        private void OnCollisionStay(Collision collision)
         {
             observer.Notify(collision);
         }
