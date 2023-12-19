@@ -3,7 +3,7 @@
     "com.unity.collab-proxy": "2.0.7",
     "com.unity.feature.development": "1.0.1",
     "com.unity.inputsystem": "1.6.3",
-    "com.unity.ml-agents.extensions": "git+https://github.com/Unity-Technologies/ml-agents.git?path=com.unity.ml-agents.extensions#release_20",
+    "com.unity.ml-agents.extensions": "git+https://github.com/Unity-Technologies/ml-agents.git?path=com.unity.ml-agents.extensions#release_21",
     "com.unity.perception": "1.0.0-preview.1",
     "com.unity.render-pipelines.high-definition": "14.0.8",
     "com.unity.rendering.denoising": "1.0.0",
