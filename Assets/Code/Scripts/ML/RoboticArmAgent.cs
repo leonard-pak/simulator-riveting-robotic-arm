@@ -1,9 +1,9 @@
 using SimulatorRivetingRoboticArm.Entity;
 using SimulatorRivetingRoboticArm.Fuselage;
 using SimulatorRivetingRoboticArm.Robotics;
-
 using Unity.MLAgents;
 using Unity.MLAgents.Actuators;
+using Unity.MLAgents.Sensors;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -23,8 +23,10 @@ namespace SimulatorRivetingRoboticArm.ML
         // For rewards
         private Transform targetHole = null;
         [SerializeField] private Transform eef = null;
-        [SerializeField] private float positionErr = 0.1f; // meters
-        [SerializeField] private float angleErr = 0.1f; // degrees
+        [SerializeField] private float positionTolerance = 0.1f; // meters
+        [SerializeField] private float angleTolerance = 0.1f; // degrees
+        [SerializeField] private float distanceStep = 0.1f; // meters
+        private float minDistance = -1f;
         // For visualization
         [SerializeField] private Material successEpisodeMaterial;
         [SerializeField] private Material failureEpisodeMaterial;
@@ -70,6 +72,8 @@ namespace SimulatorRivetingRoboticArm.ML
             targerIdx[1] = Random.Range(0, fuselageBuilder.CountHoleBlocksY);
 
             targetHole = fuselageBuilder.Build(targerIdx[0], targerIdx[1]).transform;
+
+            minDistance = Vector3.Distance(targetHole.position, eef.position);
         }
         public override void OnActionReceived(ActionBuffers actions)
         {
@@ -77,18 +81,35 @@ namespace SimulatorRivetingRoboticArm.ML
             {
                 controller.RotateJoint(i, actions.ContinuousActions[i], true);
             }
-
             var distance = Vector3.Distance(targetHole.position, eef.position);
             var angle = Vector3.Angle(targetHole.up, eef.up);
 
-            if (distance < positionErr && angle < angleErr)
+            /** Rewards **/
+            // 1. incentivise agent exploration
+            AddReward(-1f / MaxStep);
+            // 2. joints limit
+            if (controller.CheckJointsLimit())
             {
+                AddReward(-0.05f);
+            }
+            // 4. target
+            if (distance < positionTolerance && angle < angleTolerance)
+            {
+                AddReward(1f);
                 SuccessEndEpisode();
+                return;
             }
-            else if (distance < 1f)
+            // 5. stepping
+            var shift = minDistance - distance;
+            if (shift > distanceStep)
             {
-                AddReward(1 - distance);
+                AddReward(0.05f * Mathf.FloorToInt(shift / distanceStep));
+                minDistance = distance;
             }
+        }
+        public override void CollectObservations(VectorSensor sensor)
+        {
+            sensor.AddObservation(targetHole.position);
         }
         public override void Heuristic(in ActionBuffers actionsOut)
         {
@@ -103,9 +124,10 @@ namespace SimulatorRivetingRoboticArm.ML
             if (Time.time - lastNotify < collisionNotifyPeriod) return;
             lastNotify = Time.time;
 
-            if (collision.gameObject.CompareTag("fuselage"))
+            // 3. end episode if collision detect
+            if (collision.gameObject.CompareTag("fuselage") || collision.gameObject.CompareTag("robot") || collision.gameObject.CompareTag("obstacle"))
             {
-                SetReward(-1f);
+                AddReward(-1f);
                 FailEndEpisode();
             }
         }

@@ -91,6 +91,11 @@ namespace SimulatorRivetingRoboticArm.Robotics
             joint.xDrive = defaultDrive;
             joint.enabled = true;
         }
+
+        public bool IsInLimit
+        {
+            get { return joint.xDrive.target == joint.xDrive.upperLimit || joint.xDrive.target == joint.xDrive.lowerLimit; }
+        }
     }
 
 }

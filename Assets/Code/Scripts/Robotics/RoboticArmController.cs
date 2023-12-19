@@ -45,6 +45,16 @@ namespace SimulatorRivetingRoboticArm.Robotics
                 joint.ResetJoint();
             }
         }
+
+        public bool CheckJointsLimit()
+        {
+            bool res = false;
+            foreach (var joint in jointControllers)
+            {
+                res |= joint.IsInLimit;
+            }
+            return res;
+        }
     }
 }
 
