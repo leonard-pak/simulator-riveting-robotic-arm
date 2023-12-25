@@ -1,9 +1,12 @@
+using SimulatorRivetingRoboticArm.Entity;
 using UnityEngine;
 
 namespace SimulatorRivetingRoboticArm.Robotics
 {
     public class JointController : MonoBehaviour
     {
+        [SerializeField] private Axis axis;
+
         private ArticulationBody joint;
         private float speed = 0f;
 
@@ -16,7 +19,13 @@ namespace SimulatorRivetingRoboticArm.Robotics
             set { this.speed = value; }
         }
 
-        private void Awake()
+        public bool IsInLimit
+        {
+            get { return joint.xDrive.target == joint.xDrive.upperLimit || joint.xDrive.target == joint.xDrive.lowerLimit; }
+        }
+
+
+        private void Start()
         {
             joint = GetComponent<ArticulationBody>();
             defaultPosition = transform.position;
@@ -29,6 +38,7 @@ namespace SimulatorRivetingRoboticArm.Robotics
             {
                 ArticulationDrive currentDrive = joint.xDrive;
                 float newTargetDelta = Time.fixedDeltaTime * speed;
+
 
                 if (joint.jointType == ArticulationJointType.RevoluteJoint)
                 {
@@ -84,18 +94,13 @@ namespace SimulatorRivetingRoboticArm.Robotics
             speed = 0;
 
             joint.enabled = false;
-            joint.transform.position = defaultPosition;
-            joint.transform.rotation = defaultRotation;
+            joint.transform.SetPositionAndRotation(defaultPosition, defaultRotation);
             joint.velocity = Vector3.zero;
             joint.angularVelocity = Vector3.zero;
             joint.xDrive = defaultDrive;
             joint.enabled = true;
         }
 
-        public bool IsInLimit
-        {
-            get { return joint.xDrive.target == joint.xDrive.upperLimit || joint.xDrive.target == joint.xDrive.lowerLimit; }
-        }
     }
 
 }

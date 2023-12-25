@@ -10,4 +10,10 @@ namespace SimulatorRivetingRoboticArm.Entity
         FLAT,
         CYLINDRICAL,
     }
+    enum Axis
+    {
+        X,
+        Y,
+        Z,
+    }
 }

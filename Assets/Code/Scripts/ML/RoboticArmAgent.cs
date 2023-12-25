@@ -53,6 +53,15 @@ namespace SimulatorRivetingRoboticArm.ML
                     break;
             }
         }
+        private void Update()
+        {
+            //var str = "";
+            //foreach (var pos in controller.JointPositions)
+            //{
+            //    str += pos.ToString("f3") + " ";
+            //}
+            //Debug.Log(str);
+        }
         protected override void OnEnable()
         {
             base.OnEnable();
@@ -88,7 +97,7 @@ namespace SimulatorRivetingRoboticArm.ML
             // 1. incentivise agent exploration
             AddReward(-1f / MaxStep);
             // 2. joints limit
-            if (controller.CheckJointsLimit())
+            if (controller.IsJointsLimit)
             {
                 AddReward(-0.05f);
             }
@@ -109,7 +118,10 @@ namespace SimulatorRivetingRoboticArm.ML
         }
         public override void CollectObservations(VectorSensor sensor)
         {
+            // target
             sensor.AddObservation(targetHole.position);
+            // robot state
+            sensor.AddObservation(controller.JointPositions(true));
         }
         public override void Heuristic(in ActionBuffers actionsOut)
         {
