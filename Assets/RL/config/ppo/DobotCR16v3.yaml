@@ -1,6 +1,11 @@
 behaviors:
   DobotCR16:
     trainer_type: ppo
+    keep_checkpoints: 5
+    max_steps: 200000
+    time_horizon: 1000
+    summary_freq: 50000
+    threaded: true
     hyperparameters:
       batch_size: 128
       beta: 1.0e-3
@@ -19,7 +24,3 @@ behaviors:
       extrinsic:
         gamma: 0.99
         strength: 1.0
-    keep_checkpoints: 5
-    max_steps: 100000000
-    time_horizon: 1000
-    summary_freq: 50000

@@ -65,8 +65,10 @@ namespace SimulatorRivetingRoboticArm.Testing
             lastTestTime = Time.time;
             if (!testEnumerator.MoveNext())
             {
+#if UNITY_EDITOR
                 Debug.Log("Stop by Test Component");
                 UnityEditor.EditorApplication.isPlaying = false;
+#endif
             }
         }
         private IEnumerable<bool> Testing()

@@ -26,7 +26,9 @@ namespace SimulatorRivetingRoboticArm.ML
         [SerializeField] private float positionTolerance = 0.1f; // meters
         [SerializeField] private float angleTolerance = 0.1f; // degrees
         [SerializeField] private float distanceStep = 0.1f; // meters
-        private float minDistance = -1f;
+        private float minDistance;
+        private float startDistance;
+
         // For visualization
         [SerializeField] private Material successEpisodeMaterial;
         [SerializeField] private Material failureEpisodeMaterial;
@@ -53,15 +55,7 @@ namespace SimulatorRivetingRoboticArm.ML
                     break;
             }
         }
-        private void Update()
-        {
-            //var str = "";
-            //foreach (var pos in controller.JointPositions)
-            //{
-            //    str += pos.ToString("f3") + " ";
-            //}
-            //Debug.Log(str);
-        }
+
         protected override void OnEnable()
         {
             base.OnEnable();
@@ -83,7 +77,9 @@ namespace SimulatorRivetingRoboticArm.ML
             targetHole = fuselageBuilder.Build(targerIdx[0], targerIdx[1]).transform;
 
             minDistance = Vector3.Distance(targetHole.position, eef.position);
+            startDistance = minDistance;
         }
+
         public override void OnActionReceived(ActionBuffers actions)
         {
             for (int i = 0; i < actions.ContinuousActions.Length; ++i)
@@ -112,7 +108,7 @@ namespace SimulatorRivetingRoboticArm.ML
             var shift = minDistance - distance;
             if (shift > distanceStep)
             {
-                AddReward(0.05f * Mathf.FloorToInt(shift / distanceStep));
+                AddReward(0.5f * shift / startDistance);
                 minDistance = distance;
             }
         }
