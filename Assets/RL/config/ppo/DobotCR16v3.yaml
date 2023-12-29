@@ -2,7 +2,7 @@ behaviors:
   DobotCR16:
     trainer_type: ppo
     keep_checkpoints: 5
-    max_steps: 200000
+    max_steps: 10000000
     time_horizon: 1000
     summary_freq: 50000
     threaded: true
