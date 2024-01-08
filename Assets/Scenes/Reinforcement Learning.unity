@@ -870,6 +870,22 @@ PrefabInstance:
       propertyPath: type
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2892467633189444891, guid: 9d7277ae077d377418cc8f6cfa6416c7,
+        type: 3}
+      propertyPath: m_Model
+      value: 
+      objectReference: {fileID: 5022602860645237092, guid: 6748f3fb2bd15cb4e8afbdbd932433c3,
+        type: 3}
+    - target: {fileID: 2892467633189444891, guid: 9d7277ae077d377418cc8f6cfa6416c7,
+        type: 3}
+      propertyPath: m_BehaviorType
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2892467633189444891, guid: 9d7277ae077d377418cc8f6cfa6416c7,
+        type: 3}
+      propertyPath: m_InferenceDevice
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3599938715810037268, guid: 9d7277ae077d377418cc8f6cfa6416c7,
         type: 3}
       propertyPath: m_Name
